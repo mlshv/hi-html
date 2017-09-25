@@ -11,7 +11,7 @@ const EditorContainer = styled.div`
   pre {
     height: 100%;
     margin: 0;
-    white-space: pre-line;
+    white-space: pre-wrap;
   }
 
   .hljs {
@@ -42,15 +42,35 @@ const Editor = styled.textarea`
 `;
 
 class Highlight extends React.Component {
+  onEditorKeyDown = e => {
+    if (e.keyCode === 9 /* Tab */) {
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
+
+      const target = e.target;
+      const value = target.value;
+
+      e.persist();
+      this.props
+        .onChange(value.substring(0, start) + '  ' + value.substring(end))
+        .then(() => {
+          e.target.selectionStart = start + 2;
+          e.target.selectionEnd = start + 2;
+        });
+      e.preventDefault();
+    }
+  };
+
   render() {
     return (
       <EditorContainer>
-        <ReactHighlight className="html">
+        <ReactHighlight className="html code">
           {this.props.code + '\n'}
         </ReactHighlight>
         <Editor
           value={this.props.code}
-          onChange={this.props.onChange}
+          onChange={e => this.props.onChange(e.target.value)}
+          onKeyDown={this.onEditorKeyDown}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"

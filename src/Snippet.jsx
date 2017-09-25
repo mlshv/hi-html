@@ -18,7 +18,7 @@ const HighlightWrapper = styled.div`
 const ResultView = styled.div`
   flex-basis: 100%;
   box-sizing: border-box;
-  padding-left: 0.5rem;
+  padding: 0.5rem;
   @media screen and (min-width: 48rem) {
     flex-basis: 50%;
     padding-left: 1rem;
@@ -35,8 +35,10 @@ class Snippet extends React.Component {
     code: this.props.code
   };
 
-  handleChange = e => {
-    this.setState({ code: e.target.value });
+  handleChange = code => {
+    return new Promise(resolve => {
+      this.setState({ code }, resolve);
+    });
   };
 
   render() {
