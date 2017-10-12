@@ -10,8 +10,10 @@ const SnippetStyled = styled.section`
 
 const HighlightWrapper = styled.div`
   flex-basis: 100%;
+  width: 100%;
   @media screen and (min-width: 48rem) {
     flex-basis: 50%;
+    width: 50%;
   }
 `;
 

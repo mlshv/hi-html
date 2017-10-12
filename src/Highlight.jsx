@@ -5,6 +5,7 @@ import 'highlight.js/styles/atom-one-dark.css';
 
 const EditorContainer = styled.div`
   position: relative;
+  width: 100%;
   height: 100%;
 
   /* react-highlight container */
@@ -12,6 +13,7 @@ const EditorContainer = styled.div`
     height: 100%;
     margin: 0;
     white-space: pre-wrap;
+    word-wrap: break-word;
   }
 
   .hljs {
@@ -30,6 +32,7 @@ const Editor = styled.textarea`
   margin-top: 0;
   margin-left: -1px;
   padding: 0.5em;
+  box-sizing: border-box;
   overflow-x: auto;
   font-size: 1rem;
   font-family: monospace, monospace;
